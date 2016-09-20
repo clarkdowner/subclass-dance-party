@@ -1,5 +1,8 @@
 var makeSpinningDancer = function(top, left, timeBetweenSteps) {
   makeDancer.call(this, top, left, timeBetweenSteps);
+  this.$node = $('<span class="dancer spinner ' + this.dancerNum + '"></span>');
+  this.setPosition();
+
 };
 
 
@@ -9,23 +12,9 @@ makeSpinningDancer.prototype.constructor = makeSpinningDancer;
 makeSpinningDancer.prototype.oldStep = makeDancer.prototype.step;
 
 makeSpinningDancer.prototype.step = function() {
-
-  this.oldStep();  
-  this.$node.css({"transform-origin": "200% center",
-                  "animation": "circle 2s infinite"});
+  var context = this;
+  context.oldStep();  
 };
-
-// var keyframes = '@keyframes circle{
-//                     from { transform: rotate(0deg); }
-//                     to { transform: rotate(360deg); }
-//                   }
-
-//                   @keyframes inner-circle {
-//                     from { transform: rotate(0deg); }
-//                     to { transform: rotate(-360deg); }
-//                   }
-//                   "transform-origin": "200% center",
-//                   "animation": "circle 2s infinite"'
 
 
 

@@ -3,7 +3,7 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
+  background-color:#697b9e;
   background-image: url("./lib/travoltaMask.gif");
   background-repeat: no-repeat;
   background-position: center;
@@ -13,6 +13,12 @@ body{
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
+
+/* Handle the background change */
+.faceOffBackGround {
+  background-image: url("./lib/nicolas.jpeg");
+}
+
 .title, .addDancerButton{
   padding:5px 12px;
   float:right;
@@ -25,15 +31,48 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .dancer{
-  /*resize: 50%
-  display: block;*/
   box-sizing: border-box;
-/*  border:0px solid red;
-  border-radius: 0px;*/
   width: 100px;
   padding-left: 100px;
   height: 100px;
   background: url("./lib/cageDancer.png") no-repeat;
   position: absolute;
-/*  z-index: 1;*/
+}
+
+.spinner {
+    animation-name: spin;
+    animation-duration: 3000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.slide {
+  transform: translate(100, 100);
+
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes slide{
+    from {
+      transform: translateY(0);
+      transform: translateX(0);
+
+    }
+    to {
+      transform: translateY(0);
+      transform: translateX(0);
+    }
+}
+
+
+/* Handle the face changes */
+.faceOff {
+  background: red;
 }

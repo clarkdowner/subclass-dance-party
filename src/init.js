@@ -24,15 +24,42 @@ $(document).ready(function() {
     // window.dancers.push(dancerMakerFunction);
 
     // make a dancer with a random position
+    var counter = 0;
 
     var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      $('body').height() * Math.random(),
+      $('body').width() * Math.random(),
       Math.random() * 1000
     );
+
+
 
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
   });
+
+
+// Face Off Click Event
+  $('.faceOffButton').on('click', function(event) {
+    $('body').toggleClass('faceOffBackGround');
+    $('span').toggleClass('faceOff');
+  });
+
+// Line Up Click Event
+  $('.lineUpButton').on('click', function(event) {
+    var width = $('body').width();
+    
+    for (var i = 0; i < window.dancers.length; i++) {
+      var topValue = $('body').height() * .5 - dancers[i].top;
+      var leftValue = (width / 2) - (50 * window.dancers.length) + (100 * i) - dancers[i].left;
+      $(i).toggleClass('slide');  
+
+
+      dancers[i].setPosition();
+      // var leftValueArray = [];
+      // leftValueArray[i] = leftValue;
+    }
+  });
+
 });
 
