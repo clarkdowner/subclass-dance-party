@@ -1,5 +1,5 @@
 var makeSpinningDancer = function(top, left, timeBetweenSteps) {
-  noTouchingDancer.call(this, top, left, timeBetweenSteps);
+  makeDancer.call(this, top, left, timeBetweenSteps);
 };
 
 
@@ -11,5 +11,21 @@ makeSpinningDancer.prototype.oldStep = makeDancer.prototype.step;
 makeSpinningDancer.prototype.step = function() {
 
   this.oldStep();  
-  this.$node.toggle();
+  this.$node.css({"transform-origin": "200% center",
+                  "animation": "circle 2s infinite"});
 };
+
+// var keyframes = '@keyframes circle{
+//                     from { transform: rotate(0deg); }
+//                     to { transform: rotate(360deg); }
+//                   }
+
+//                   @keyframes inner-circle {
+//                     from { transform: rotate(0deg); }
+//                     to { transform: rotate(-360deg); }
+//                   }
+//                   "transform-origin": "200% center",
+//                   "animation": "circle 2s infinite"'
+
+
+

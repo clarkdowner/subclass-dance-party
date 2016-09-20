@@ -30,8 +30,7 @@ $(document).ready(function() {
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
-    window[dancerMakerFunction] = [];
-    window[dancerMakerFunction].push(dancer);
+
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
   });
