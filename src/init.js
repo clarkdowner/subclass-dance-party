@@ -1,6 +1,7 @@
 $(document).ready(function() {
   window.dancers = [];
-
+  window.faceOff = false;
+  
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -26,23 +27,28 @@ $(document).ready(function() {
     // make a dancer with a random position
     var counter = 0;
 
+
     var dancer = new dancerMakerFunction(
       $('body').height() * Math.random(),
       $('body').width() * Math.random(),
       Math.random() * 1000
     );
 
-
-
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
   });
 
-
 // Face Off Click Event
   $('.faceOffButton').on('click', function(event) {
     $('body').toggleClass('faceOffBackGround');
-    $('span').toggleClass('faceOff');
+    if (faceOff) {
+      $('span').removeClass('faceOff');
+      faceOff = false;
+    } else {
+      $('span').addClass('faceOff');
+      faceOff = true;
+    }
+
   });
 
 // Line Up Click Event
@@ -50,16 +56,33 @@ $(document).ready(function() {
     var width = $('body').width();
     
     for (var i = 0; i < window.dancers.length; i++) {
-      var topValue = $('body').height() * .5 - dancers[i].top;
-      var leftValue = (width / 2) - (50 * window.dancers.length) + (100 * i) - dancers[i].left;
-      $(i).toggleClass('slide');  
+      var topValue = $('body').height() * .5;
+      var leftValue = (width / 2) - (50 * window.dancers.length) + (100 * i);
 
-
+      dancers[i].top = topValue;
+      dancers[i].left = leftValue;
       dancers[i].setPosition();
-      // var leftValueArray = [];
-      // leftValueArray[i] = leftValue;
-    }
+    }    
   });
 
+
+// No Touching Click Event
+  $('.noTouchingButton').on('click', function(event) {
+    var width = $('body').width();
+    var height = $('body').height();
+
+    for (var i = 0; i < window.dancers.length; i++) {
+      for (var j = i + 1; j < window.dancers.length; j++) {
+        if (Math.sqrt(Math.pow(window.dancers[i].left, 2) + Math.pow(window.dancers[j].left, 2)) || Math.sqrt(Math.pow(window.dancers[i].top, 2) + Math.pow(window.dancers[j].top, 2)) < 50) {
+          window.dancers[i].left -= Math.random() * 50;
+          window.dancers[j].left += Math.random() * 50;
+          window.dancers[i].top += Math.random() * 50;
+          window.dancers[j].top -= Math.random() * 50;
+        }
+        dancers[i].setPosition();
+        dancers[j].setPosition();
+      }
+    }
+  });
 });
 
